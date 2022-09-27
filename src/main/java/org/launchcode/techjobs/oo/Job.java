@@ -1,12 +1,11 @@
 package org.launchcode.techjobs.oo;
 
+import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class Job {
-
     private int id;
     private static int nextId = 1;
-
     private String name;
     private Employer employer;
     private Location location;
@@ -29,7 +28,6 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
-
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
@@ -92,4 +90,37 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+    @Override
+    public String toString() {
+        String[] labels = {"ID: ", "Name: ", "Employer: ", "Location: ", "Position Type: ", "Core Competency: "};
+        Field[] fields = Job.class.getDeclaredFields();
+        String errorMessage = "Data not available";
+        String message = "\n";
+        int i = 0;
+
+        for (Field f : fields) {
+            if (f.getName() == "nextId") {
+            } else {
+                try {
+                    if (f.get(this) instanceof JobField) {
+                        if (((JobField) f.get(this)).getValue() == "") {
+                            message = message + labels[i] + errorMessage + "\n";
+                        } else {
+                            message = message + labels[i] + f.get(this) + "\n";
+                        }
+                    } else if (f.get(this) == null || f.get(this) == "") {
+                        message = message + labels[i] + errorMessage + "\n";
+                    } else {
+                        message = message + labels[i] + f.get(this) + "\n";
+                    }
+                    i++;
+                } catch (Exception e) {
+                    message = message + labels[i] + errorMessage + "\n";
+                    i++;
+                }
+            }
+        }
+        return message;
+    }
 }
+
