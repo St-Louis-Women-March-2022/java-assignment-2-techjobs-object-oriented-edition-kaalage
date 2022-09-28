@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Employer extends JobField{
 
-    public Employer() {
-        id = nextId;
-        nextId++;
+    Employer() {
+        super();
     }
+
 
     public Employer(String aValue) {
         this();

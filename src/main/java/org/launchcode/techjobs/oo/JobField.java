@@ -13,10 +13,10 @@ public abstract class JobField {
         nextId++;
     }
 
-    public JobField(String Value) {
-        this();
-        this.value = Value;
+    public JobField(String value) {
+        this.value = value;
     }
+
 
     @Override
     public String toString() {

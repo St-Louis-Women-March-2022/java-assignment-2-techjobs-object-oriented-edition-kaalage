@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class PositionType extends JobField {
 
-    public PositionType() {
-        id = nextId;
-        nextId++;
+    PositionType() {
+        super();
     }
+
 
     public PositionType(String value) {
         this();
